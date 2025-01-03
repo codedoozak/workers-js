@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>SLOW </div>
+    <input id="inputNumber" value=100 />
+    <button onclick="calcFib()">Calc</button>
+
+    <p>proccessed :
+        <span id="count">
+
+            5
+    </p>
+    </p>
+    <progress id="progressbar" value="32" max="100"> 32% </progress>
+    <p>proccessing :
+        <span id="sub-count">
+
+            5
+    </p>
+    </p>
+    <progress id="sub-progressbar" value="32" max="100"> 32% </progress>
+    <div>FAST </div>
+
+
+    <input id="fastInputNumber" value=100 />
+    <button onclick="fastCalcFib()">Fast Calc</button>
+
+    <p>proccessed :
+        <span id="fastCount">
+
+            5
+    </p>
+    </p>
+    <progress id="fast-progressbar" value="32" max="100"> 32% </progress>
+
+
+    <style>
+        body {
+            height: 2000vh;
+        }
+
+        div {
+            background-color: blueviolet;
+            margin-top: 60px;
+            margin-bottom: 30px;
+        }
+    </style>
+    <script src="./script.js" defer></script>
+</body>
+
+</html>
