@@ -23,7 +23,7 @@ const fastCalcFib = () => {
 };
 
 worker.onmessage = function (event) {
-  console.log("[script.js]", event.data);
+  //  console.log("[script.js]", event.data);
 
   if (event.data.type === "progress") {
     countSpan.innerHTML = event.data.calculated;
