@@ -1,7 +1,9 @@
-const executionPattern = {};
+let executionPattern = {};
 
 function fibonacci(n) {
-  executionPattern[n] = executionPattern[n] ? +executionPattern[n] + 1 : 1;
+  if (n >= 1) {
+    executionPattern[n] = executionPattern[n] ? +executionPattern[n] + 1 : 1;
+  }
   //console.log(executionPattern);
 
   self.postMessage({ type: "progress", calculated: 1 });
@@ -16,9 +18,11 @@ self.onmessage = function (event) {
   console.time("start");
   const result = fibonacci(event.data);
   console.log("executionPattern", executionPattern);
+
   console.log("result", result);
 
   self.postMessage({ type: "finished" });
 
+  executionPattern = {};
   console.timeEnd("start");
 };

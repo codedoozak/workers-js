@@ -72,7 +72,7 @@ const updateTable = (pattern) => {
 
   // Add table header
   const headerRow = document.createElement("tr");
-  const headers = ["Key", "Value"];
+  const headers = ["Fib(N)", "Called Times"];
   headers.forEach((header) => {
     const th = document.createElement("th");
     th.innerText = header;
@@ -101,14 +101,12 @@ const updateTable = (pattern) => {
     valueCell.style.textAlign = "center";
 
     // Append cells to row and row to table
-    row.style.backgroundColor = "pink";
-    if (key === "10") {
-      console.log(pattern, key, +pattern[+key + 2], value);
-    }
+    row.style.backgroundColor = "#eee9";
 
     if (+pattern[+key + 1] + pattern[+key + 2] === +value) {
-      row.style.backgroundColor = "green";
+      row.style.backgroundColor = "#3939";
     }
+
     row.appendChild(keyCell);
     row.appendChild(valueCell);
     table.appendChild(row);
