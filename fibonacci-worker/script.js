@@ -35,6 +35,9 @@ worker.onmessage = function (event) {
     subProgressbarEl.value = event.data.calculating;
     //self.postMessage({ type: "progress", calculated: n - 1 })
   }
+  if (event.data.type === "execution") {
+    updateTable(event.data.pattern);
+  }
   if (event.data.type === "finished") {
     countSpan.innerHTML = "done";
     progressbarEl.value = 100;
@@ -54,6 +57,84 @@ fastWorker.onmessage = function (event) {
     fastProgressbarEl.value = 100;
   }
 };
+
+const updateTable = (pattern) => {
+  // Get the table container or create a new table
+  const tableContainer = document.getElementById("table-container");
+
+  // Clear previous table data if it exists
+  tableContainer.innerHTML = "";
+
+  // Create a new table
+  const table = document.createElement("table");
+  table.style.borderCollapse = "collapse";
+  table.style.width = "100%";
+
+  // Add table header
+  const headerRow = document.createElement("tr");
+  const headers = ["Key", "Value"];
+  headers.forEach((header) => {
+    const th = document.createElement("th");
+    th.innerText = header;
+    th.style.border = "1px solid black";
+    th.style.padding = "8px";
+    th.style.backgroundColor = "#f2f2f2";
+    table.appendChild(headerRow);
+    headerRow.appendChild(th);
+  });
+
+  // Add table rows for pattern data
+  Object.entries(pattern).forEach(([key, value]) => {
+    const row = document.createElement("tr");
+
+    // Create cells for key and value
+    const keyCell = document.createElement("td");
+    keyCell.innerText = key;
+    keyCell.style.border = "1px solid black";
+    keyCell.style.padding = "8px";
+    keyCell.style.textAlign = "center";
+
+    const valueCell = document.createElement("td");
+    valueCell.innerText = value;
+    valueCell.style.border = "1px solid black";
+    valueCell.style.padding = "8px";
+    valueCell.style.textAlign = "center";
+
+    // Append cells to row and row to table
+    row.style.backgroundColor = "pink";
+    if (key === "10") {
+      console.log(pattern, key, +pattern[+key + 2], value);
+    }
+
+    if (+pattern[+key + 1] + pattern[+key + 2] === +value) {
+      row.style.backgroundColor = "green";
+    }
+    row.appendChild(keyCell);
+    row.appendChild(valueCell);
+    table.appendChild(row);
+  });
+
+  // Append the table to the container
+  tableContainer.appendChild(table);
+};
+
+// Example usage
+const pattern = {
+  0: 89,
+  1: 144,
+  2: 89,
+  3: 55,
+  4: 34,
+  5: 21,
+  6: 13,
+  7: 8,
+  8: 5,
+  9: 3,
+  10: 2,
+  11: 1,
+  12: 1,
+};
+updateTable(pattern);
 
 const stopHandler = () => {
   worker.postMessage("stop");

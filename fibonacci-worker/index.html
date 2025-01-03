@@ -7,7 +7,7 @@
   </head>
 
   <body>
-    <div>SLOW</div>
+    <div class="ctr">SLOW</div>
     <input id="inputNumber" value="12" />
     <button onclick="calcFib()">Calc</button>
 
@@ -21,7 +21,9 @@
       <span id="sub-count"> "" </span>
     </p>
     <progress id="sub-progressbar" value="0" max="100">32%</progress>
-    <div>FAST</div>
+
+    <div class="tbl" id="table-container"></div>
+    <div class="ctr">FAST</div>
 
     <input id="fastInputNumber" value="20" />
     <button onclick="fastCalcFib()">Fast Calc</button>
@@ -37,7 +39,11 @@
         height: 2000vh;
       }
 
-      div {
+      div.tbl {
+        width: 120px;
+      }
+
+      div.ctr {
         background-color: blueviolet;
         margin-top: 60px;
         margin-bottom: 30px;

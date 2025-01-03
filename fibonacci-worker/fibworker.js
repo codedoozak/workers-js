@@ -1,27 +1,23 @@
-const arr = new Set();
+const executionPattern = {};
 
 function fibonacci(n) {
-  arr.add(n);
+  executionPattern[n] = executionPattern[n] ? +executionPattern[n] + 1 : 1;
+  //console.log(executionPattern);
 
-  const z = Array.from(arr).sort(function (a, b) {
-    return b - a;
-  });
-
-  console.log("fib - xxx -- ", z);
-
-  self.postMessage({ type: "progress", calculated: z[0] - 1 });
+  self.postMessage({ type: "progress", calculated: 1 });
   self.postMessage({ type: "sub-progress", calculating: n });
+  self.postMessage({ type: "execution", pattern: executionPattern });
 
   if (n <= 1) return n;
-
-  // Recursive case
   return fibonacci(n - 1) + fibonacci(n - 2);
 }
 
 self.onmessage = function (event) {
   console.time("start");
+  const result = fibonacci(event.data);
+  console.log("executionPattern", executionPattern);
+  console.log("result", result);
 
-  fibonacci(event.data);
   self.postMessage({ type: "finished" });
 
   console.timeEnd("start");
